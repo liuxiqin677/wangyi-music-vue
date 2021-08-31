@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
+import store from '../store/index'
 
 const routes = [
   {
@@ -14,6 +15,33 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  },
+  {
+    path: '/listView',
+    name: 'listView',
+    component: () => import(/* webpackChunkName: "about" */ '../views/ListView.vue')
+  },
+  {
+    path: '/serachview',
+    name: 'serachview',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Serach.vue')
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
+  },
+  {
+    path: '/me',
+    name: 'me',
+    beforeEnter: (to, from, next) => {
+      if(store.state.user.isLogin){
+        next()
+      }else{
+        next('/login')
+      }
+    },
+    component: () => import(/* webpackChunkName: "about" */ '../views/Me.vue')
   }
 ]
 

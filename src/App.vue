@@ -1,30 +1,36 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div>
+      <router-view/>
+      <playContentRoller></playContentRoller>
   </div>
-  <router-view/>
 </template>
 
-<style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import playContentRoller from './components/playContentRoller.vue'
+export default {
+  components:{
+    playContentRoller
+  },
+  mounted() {
+    let userData = JSON.parse(localStorage.userData)
+    this.$store.commit('setUser',userData)
+  },
 }
+</script>
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+<style lang="less">
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: '微软雅黑';
+}
+.icon{
+  width: 0.30rem;
+  height: 0.30rem;
+}
+a{
+  color:#333;
+  text-decoration: none;
 }
 </style>
